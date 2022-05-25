@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.slf4j.Logger;
+import vladaviedov.getinthebucketmod.Constants;
 
 public class VanillaBucketOf extends BucketOf {
 
@@ -21,7 +22,7 @@ public class VanillaBucketOf extends BucketOf {
 
     @Override
     public void placeEntity(Level world, ItemStack item, BlockPos pos, Player player) {
-        if (item.getTagElement(DATA_TAG) != null) {
+        if (item.getTagElement(Constants.DATA_TAG) != null) {
             super.placeEntity(world, item, pos, player);
         }
 

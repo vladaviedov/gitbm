@@ -24,12 +24,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
+import vladaviedov.getinthebucketmod.Constants;
 
 import java.util.UUID;
 
 public class BucketOf extends Item {
 
-    protected static final String DATA_TAG = "EntityData";
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public BucketOf(Properties props) {
@@ -89,7 +89,7 @@ public class BucketOf extends Item {
 
     public void placeEntity(Level world, ItemStack item, BlockPos pos, Player player) {
         ServerLevel server = (ServerLevel) world;
-        CompoundTag entityData = item.getTagElement(DATA_TAG);
+        CompoundTag entityData = item.getTagElement(Constants.DATA_TAG);
         if (entityData == null) {
             LOGGER.error("Data tag is null");
             return;

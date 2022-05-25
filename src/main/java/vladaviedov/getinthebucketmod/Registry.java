@@ -21,7 +21,8 @@ public class Registry {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(
-                makeItem(EntityType.BAT, "bucket_of_bat")
+                makeItem(EntityType.BAT, "bucket_of_bat"),
+                makeItem(EntityType.ZOMBIE, "bucket_of_zombie")
         );
     }
 
