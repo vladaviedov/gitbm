@@ -41,15 +41,8 @@ public class BucketOf extends Item {
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
 
-//        HitResult trace = getPlayerPOVHitResult(world, player, ClipContext.Fluid.ANY);
-//        if (trace.getType() != HitResult.Type.BLOCK) {
-//            return new InteractionResultHolder<>(InteractionResult.PASS, heldItem);
-//        }
-
         BlockHitResult trace = getPlayerPOVHitResult(world, player, ClipContext.Fluid.ANY);
-//        BlockHitResult target = (BlockHitResult) trace;
-        BlockHitResult target = trace;
-        BlockPos targetPos = target.getBlockPos();
+        BlockPos targetPos = trace.getBlockPos();
 
         if (!player.mayInteract(world, targetPos)) {
             return new InteractionResultHolder<>(InteractionResult.FAIL, heldItem);
@@ -65,8 +58,8 @@ public class BucketOf extends Item {
 
         // Find correct position
         BlockState blockState = world.getBlockState(targetPos);
-        if (blockState.getCollisionShape(world, targetPos).isEmpty()) {
-            targetPos = targetPos.offset(target.getDirection().getNormal());
+        if (!blockState.getCollisionShape(world, targetPos).isEmpty()) {
+            targetPos = targetPos.offset(trace.getDirection().getNormal());
         }
 
         placeEntity(world, heldItem, targetPos, player);
@@ -95,7 +88,8 @@ public class BucketOf extends Item {
             return;
         }
 
-        Entity ent = EntityType.loadEntityRecursive(entityData, server, e -> {
+        EntityType.loadEntityRecursive(entityData, server, e -> {
+            e.setPos(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
             while (!server.tryAddFreshEntityWithPassengers(e)) {
                 e.setUUID(UUID.randomUUID());
             }

@@ -24,9 +24,9 @@ public class VanillaBucketOf extends BucketOf {
     public void placeEntity(Level world, ItemStack item, BlockPos pos, Player player) {
         if (item.getTagElement(Constants.DATA_TAG) != null) {
             super.placeEntity(world, item, pos, player);
+        } else {
+            _entType.spawn((ServerLevel) world, item, player, pos, MobSpawnType.BUCKET, false, false);
         }
-
-        _entType.spawn((ServerLevel) world, item, player, pos, MobSpawnType.BUCKET, false, false);
     }
 
 }

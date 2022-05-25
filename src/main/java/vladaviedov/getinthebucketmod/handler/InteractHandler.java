@@ -42,11 +42,11 @@ public class InteractHandler {
             return;
         }
 
-        target.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0f, 1.0f);
         Item bucketOf = Registry.itemLookup.get(target.getType());
         if (bucketOf == null) {
             return;
         }
+        target.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0f, 1.0f);
 
         // Save NBT
         ItemStack itemStack = new ItemStack(bucketOf);
@@ -63,7 +63,7 @@ public class InteractHandler {
         }
 
         // Update stats
-        if (target.getLevel().isClientSide()) {
+        if (!target.getLevel().isClientSide()) {
             CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, itemStack);
         }
 
