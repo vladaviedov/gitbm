@@ -12,9 +12,7 @@ import org.slf4j.Logger;
 
 public class VanillaBucketOf extends BucketOf {
 
-    private static final Logger LOGGER = LogUtils.getLogger();
-
-    private EntityType<?> _entType;
+    private final EntityType<?> _entType;
 
     public VanillaBucketOf(Properties props, EntityType<?> entType) {
         super(props);
