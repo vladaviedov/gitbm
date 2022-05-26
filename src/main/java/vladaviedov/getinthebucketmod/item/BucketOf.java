@@ -2,16 +2,13 @@ package vladaviedov.getinthebucketmod.item;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -21,7 +18,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import vladaviedov.getinthebucketmod.Constants;
@@ -30,7 +26,7 @@ import java.util.UUID;
 
 public class BucketOf extends Item {
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Logger logger = LogUtils.getLogger();
 
     public BucketOf(Properties props) {
         super(props);
@@ -84,7 +80,7 @@ public class BucketOf extends Item {
         ServerLevel server = (ServerLevel) world;
         CompoundTag entityData = item.getTagElement(Constants.DATA_TAG);
         if (entityData == null) {
-            LOGGER.error("Data tag is null");
+            logger.error("Data tag is null");
             return;
         }
 

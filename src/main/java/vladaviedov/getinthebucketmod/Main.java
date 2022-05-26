@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class Main
 {
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Logger logger = LogUtils.getLogger();
 
     public Main()
     {
@@ -32,7 +32,7 @@ public class Main
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("Setup");
+        logger.info("Setup");
     }
 
 }

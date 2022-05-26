@@ -10,14 +10,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.core.jmx.Server;
 import vladaviedov.getinthebucketmod.Constants;
 import vladaviedov.getinthebucketmod.Registry;
 import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
@@ -33,7 +32,13 @@ public class InteractHandler {
         Entity target = event.getTarget();
 
         // Ignore if not bucket or player is crouching
-        if (item.getItem() != Items.BUCKET || player.isCrouching()) {
+        // instaceof to allow other buckets to work
+        if (!isBucket(item) || player.isCrouching()) {
+            return;
+        }
+
+        // Main hand is already doing the grab
+        if (hand.equals(InteractionHand.OFF_HAND) && isBucket(player.getItemInHand(InteractionHand.MAIN_HAND))) {
             return;
         }
 
@@ -42,27 +47,14 @@ public class InteractHandler {
             return;
         }
 
-        Item bucketOf = Registry.itemLookup.get(target.getType());
+        Item bucketOf = Registry.lookup(target.getType());
         if (bucketOf == null) {
             return;
         }
+        ItemStack itemStack = serializeEntToItem(bucketOf, target);
+
+        // Play sound & Update stats
         target.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0f, 1.0f);
-
-        // Save NBT
-        ItemStack itemStack = new ItemStack(bucketOf);
-        itemStack.addTagElement(Constants.DATA_TAG, target.serializeNBT());
-        itemStack.addTagElement(Constants.UUID_TAG, StringTag.valueOf(target.getStringUUID()));
-        if (!(bucketOf instanceof VanillaBucketOf)) {
-            CompoundTag display = new CompoundTag();
-            ListTag lore = new ListTag();
-
-            StringTag name = StringTag.valueOf("\"" + target.getName().getString());
-            lore.add(name);
-            display.put("Lore", lore);
-            itemStack.addTagElement("display", display);
-        }
-
-        // Update stats
         if (!target.getLevel().isClientSide()) {
             CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, itemStack);
         }
@@ -80,6 +72,27 @@ public class InteractHandler {
         // Remove entity
         target.remove(Entity.RemovalReason.DISCARDED);
         event.setResult(Event.Result.ALLOW);
+    }
+
+    private static boolean isBucket(ItemStack item) {
+        return item.getItem() instanceof BucketItem;
+    }
+
+    private static ItemStack serializeEntToItem(Item item, Entity ent) {
+        ItemStack itemStack = new ItemStack(item);
+        itemStack.addTagElement(Constants.DATA_TAG, ent.serializeNBT());
+        itemStack.addTagElement(Constants.UUID_TAG, StringTag.valueOf(ent.getStringUUID()));
+        if (!(item instanceof VanillaBucketOf)) {
+            CompoundTag display = new CompoundTag();
+            ListTag lore = new ListTag();
+
+            StringTag name = StringTag.valueOf("\"" + ent.getName().getString() + "\"");
+            lore.add(name);
+            display.put("Lore", lore);
+            itemStack.addTagElement("display", display);
+        }
+
+        return itemStack;
     }
 
 }
