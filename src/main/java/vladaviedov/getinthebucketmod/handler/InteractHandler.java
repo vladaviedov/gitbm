@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -75,7 +76,7 @@ public class InteractHandler {
     }
 
     private static boolean isBucket(ItemStack item) {
-        return item.getItem() instanceof BucketItem;
+        return item.getItem() == Items.BUCKET;
     }
 
     private static ItemStack serializeEntToItem(Item item, Entity ent) {
