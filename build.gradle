@@ -12,9 +12,19 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
+	id "com.diffplug.spotless" version "6.4.2"
 }
 apply plugin: 'net.minecraftforge.gradle'
 
+// Spotless config
+spotless {
+	java {
+		trimTrailingWhitespace()
+		indentWithTabs()
+		endWithNewline()
+		removeUnusedImports()
+	}
+}
 
 version = '1.0'
 group = 'vladaviedov.getinthebucketmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
