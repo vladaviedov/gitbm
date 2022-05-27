@@ -4,17 +4,12 @@ license="MIT"
 
 [[mods]]
 modId="getinthebucketmod"
-
-# Display
-version="${file.jarVersion}"
+version="4.0.0-beta"
 displayName="Get in the Bucket Mod"
 logoFile="logo.png"
-
-# Authors etc
-credits="myself"
 authors="Vladyslav Aviedov"
 description='''
-Get in the Bucket Mod
+Mod that allows you to put mobs into buckets
 '''
 
 # Forge
