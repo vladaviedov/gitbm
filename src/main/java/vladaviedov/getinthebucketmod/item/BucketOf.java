@@ -76,6 +76,13 @@ public class BucketOf extends Item {
 		return new InteractionResultHolder<>(InteractionResult.PASS, heldItem);
 	}
 
+	/**
+	 * Place entity in the world
+	 * @param world world
+	 * @param item bucket of
+	 * @param pos position
+	 * @param player player
+	 */
 	public void placeEntity(Level world, ItemStack item, BlockPos pos, Player player) {
 		ServerLevel server = (ServerLevel) world;
 		CompoundTag entityData = item.getTagElement(Constants.DATA_TAG);

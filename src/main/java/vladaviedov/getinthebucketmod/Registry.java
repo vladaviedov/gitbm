@@ -21,10 +21,6 @@ public class Registry {
 	private static final Map<EntityType<?>, Item> itemLookup = new HashMap<>();
 	public static Item generic_bucket_of;
 
-	/**
-	 * Register items
-	 * @param event register event
-	 */
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		generic_bucket_of = new BucketOf(new Item.Properties()

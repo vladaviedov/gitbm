@@ -11,6 +11,7 @@ import vladaviedov.getinthebucketmod.Constants;
 
 public class VanillaBucketOf extends BucketOf {
 
+	// Stored entity type
 	private final EntityType<?> _entType;
 
 	public VanillaBucketOf(Properties props, EntityType<?> entType) {

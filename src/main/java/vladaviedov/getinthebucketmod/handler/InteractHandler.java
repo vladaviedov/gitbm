@@ -1,8 +1,6 @@
 package vladaviedov.getinthebucketmod.handler;
 
-import com.mojang.logging.LogUtils;
 
-import org.slf4j.Logger;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
@@ -33,8 +31,6 @@ import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
 @Mod.EventBusSubscriber
 public class InteractHandler {
 
-	private static Logger logger = LogUtils.getLogger();
-
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent.EntityInteractSpecific event) {
 		Player player = event.getPlayer();
@@ -47,6 +43,7 @@ public class InteractHandler {
 			return;
 		}
 
+		// Sometimes the server does not recieve this event
 		if (target.getType() == EntityType.ENDER_DRAGON) {
 			EnderDragon dragon = ((EnderDragonPart) target).getParent();
 			for (EnderDragonPart part : dragon.getSubEntities()) {
