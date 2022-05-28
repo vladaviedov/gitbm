@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +17,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
 import vladaviedov.getinthebucketmod.Constants;
 import vladaviedov.getinthebucketmod.Registry;
 import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
@@ -31,26 +32,15 @@ public class InteractHandler {
 		ItemStack item = player.getItemInHand(hand);
 		Entity target = event.getTarget();
 
-		// Ignore if not bucket or player is crouching
-		// instaceof to allow other buckets to work
-		if (!isBucket(item) || player.isCrouching()) {
-			return;
-		}
-
-		// Main hand is already doing the grab
-		if (hand.equals(InteractionHand.OFF_HAND) && isBucket(player.getItemInHand(InteractionHand.MAIN_HAND))) {
-			return;
-		}
-
-		// Can't bucket other people
-		if (target.getType() == EntityType.PLAYER) {
+		// Cases to ignore event
+		// Not a fan of the instaceof, but idk how else
+		if (!isBucket(item) || player.isCrouching() || !target.isAlive() || !(target instanceof Mob)) {
 			return;
 		}
 
 		Item bucketOf = Registry.lookup(target.getType());
-		if (bucketOf == null) {
-			return;
-		}
+
+		prepareEnt(target);
 		ItemStack itemStack = serializeEntToItem(bucketOf, target);
 
 		// Play sound & Update stats
@@ -76,6 +66,12 @@ public class InteractHandler {
 
 	private static boolean isBucket(ItemStack item) {
 		return item.getItem() == Items.BUCKET;
+	}
+
+	private static void prepareEnt(Entity ent) {
+		ent.ejectPassengers();
+		ent.setDeltaMovement(0, 0, 0);
+		ent.fallDistance = 0;
 	}
 
 	private static ItemStack serializeEntToItem(Item item, Entity ent) {
