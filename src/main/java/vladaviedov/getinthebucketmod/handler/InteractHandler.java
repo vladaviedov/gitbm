@@ -1,5 +1,9 @@
 package vladaviedov.getinthebucketmod.handler;
 
+import com.mojang.logging.LogUtils;
+
+import org.slf4j.Logger;
+
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -8,7 +12,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Entity.RemovalReason;
+import net.minecraft.world.entity.boss.EnderDragonPart;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +33,8 @@ import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
 @Mod.EventBusSubscriber
 public class InteractHandler {
 
+	private static Logger logger = LogUtils.getLogger();
+
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent.EntityInteractSpecific event) {
 		Player player = event.getPlayer();
@@ -33,8 +43,20 @@ public class InteractHandler {
 		Entity target = event.getTarget();
 
 		// Cases to ignore event
-		// Not a fan of the instaceof, but idk how else
-		if (!isBucket(item) || player.isCrouching() || !target.isAlive() || !(target instanceof Mob)) {
+		if (!isBucket(item) || player.isCrouching() || !target.isAlive()) {
+			return;
+		}
+
+		if (target.getType() == EntityType.ENDER_DRAGON) {
+			EnderDragon dragon = ((EnderDragonPart) target).getParent();
+			for (EnderDragonPart part : dragon.getSubEntities()) {
+				part.remove(RemovalReason.DISCARDED);
+			}
+			target = dragon;
+		}
+
+		// Not a fan, but it works
+		if (!(target instanceof Mob)) {
 			return;
 		}
 
