@@ -7,6 +7,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.slf4j.Logger;
+
+import vladaviedov.getinthebucketmod.item.BucketOf;
 import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
 
 import java.util.HashMap;
@@ -17,13 +19,14 @@ public class Registry {
 
 	private static final Logger logger = LogUtils.getLogger();
 	private static final Map<EntityType<?>, Item> itemLookup = new HashMap<>();
+	public static Item generic_bucket_of;
 
-	/**
-	 * Register items
-	 * @param event register event
-	 */
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
+		generic_bucket_of = new BucketOf(new Item.Properties()
+			.stacksTo(1))
+			.setRegistryName("bucket_of_entity");
+
 		event.getRegistry().registerAll(
 				// Passive mobs
 				makeItem(EntityType.AXOLOTL, "bucket_of_axolotl"), /* no texture */
@@ -104,7 +107,10 @@ public class Registry {
 
 				// Bosses
 				makeItem(EntityType.WITHER, "bucket_of_wither"),
-				makeItem(EntityType.ENDER_DRAGON, "bucket_of_ender_dragon")
+				makeItem(EntityType.ENDER_DRAGON, "bucket_of_ender_dragon"),
+
+				// Generic
+				generic_bucket_of
 		);
 	}
 
@@ -130,7 +136,8 @@ public class Registry {
 	 * @return item
 	 */
 	public static Item lookup(EntityType<?> t) {
-		return itemLookup.get(t);
+		Item result = itemLookup.get(t);
+		return result != null ? result : generic_bucket_of;
 	}
 
 }
