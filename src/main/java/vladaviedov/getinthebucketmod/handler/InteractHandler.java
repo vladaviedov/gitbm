@@ -1,7 +1,5 @@
 package vladaviedov.getinthebucketmod.handler;
 
-
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
