@@ -29,16 +29,16 @@ public class Registry {
 
 		event.getRegistry().registerAll(
 				// Passive mobs
-				makeItem(EntityType.AXOLOTL, "bucket_of_axolotl"), /* no texture */
+				makeItem(EntityType.AXOLOTL, "bucket_of_axolotl"),
 				makeItem(EntityType.BAT, "bucket_of_bat"),
 				makeItem(EntityType.CAT, "bucket_of_cat"),
-				makeItem(EntityType.COD, "bucket_of_cod"), /* no texture */
+				makeItem(EntityType.COD, "bucket_of_cod"),
 				makeItem(EntityType.CHICKEN, "bucket_of_chicken"),
 				makeItem(EntityType.COW, "bucket_of_cow"),
 				makeItem(EntityType.DONKEY, "bucket_of_donkey"),
 				makeItem(EntityType.FOX, "bucket_of_fox"),
 				makeItem(EntityType.GIANT, "bucket_of_giant"),
-				makeItem(EntityType.GLOW_SQUID, "bucket_of_glow_squid"), /* no texture */
+				makeItem(EntityType.GLOW_SQUID, "bucket_of_glow_squid"),
 				makeItem(EntityType.HORSE, "bucket_of_horse"),
 				makeItem(EntityType.MOOSHROOM, "bucket_of_mooshroom"),
 				makeItem(EntityType.MULE, "bucket_of_mule"),
@@ -47,14 +47,14 @@ public class Registry {
 				makeItem(EntityType.PARROT, "bucket_of_parrot"),
 				makeItem(EntityType.PIG, "bucket_of_pig"),
 				makeItem(EntityType.RABBIT, "bucket_of_rabbit"),
-				makeItem(EntityType.SALMON, "bucket_of_salmon"), /* no texture */
+				makeItem(EntityType.SALMON, "bucket_of_salmon"),
 				makeItem(EntityType.SHEEP, "bucket_of_sheep"),
 				makeItem(EntityType.SKELETON_HORSE, "bucket_of_skeleton_horse"),
 				makeItem(EntityType.SNOW_GOLEM, "bucket_of_snow_golem"),
 				makeItem(EntityType.SQUID, "bucket_of_squid"),
 				makeItem(EntityType.STRIDER, "bucket_of_strider"),
 				makeItem(EntityType.TURTLE, "bucket_of_turtle"),
-				makeItem(EntityType.TROPICAL_FISH, "bucket_of_tropical_fish"), /* no texture */
+				makeItem(EntityType.TROPICAL_FISH, "bucket_of_tropical_fish"),
 				makeItem(EntityType.VILLAGER, "bucket_of_villager"),
 				makeItem(EntityType.ZOMBIE_HORSE, "bucket_of_zombie_horse"),
 
@@ -94,11 +94,11 @@ public class Registry {
 				makeItem(EntityType.CAVE_SPIDER, "bucket_of_cave_spider"),
 				makeItem(EntityType.DOLPHIN, "bucket_of_dolphin"),
 				makeItem(EntityType.ENDERMAN, "bucket_of_enderman"),
-				makeItem(EntityType.GOAT, "bucket_of_goat"), /* no texture */
+				makeItem(EntityType.GOAT, "bucket_of_goat"),
 				makeItem(EntityType.IRON_GOLEM, "bucket_of_iron_golem"),
 				makeItem(EntityType.LLAMA, "bucket_of_llama"),
 				makeItem(EntityType.POLAR_BEAR, "bucket_of_polar_bear"),
-				makeItem(EntityType.PUFFERFISH, "bucket_of_pufferfish"), /* no texture */
+				makeItem(EntityType.PUFFERFISH, "bucket_of_pufferfish"),
 				makeItem(EntityType.SPIDER, "bucket_of_spider"),
 				makeItem(EntityType.TRADER_LLAMA, "bucket_of_trader_llama"),
 				makeItem(EntityType.WANDERING_TRADER, "bucket_of_wandering_trader"),
