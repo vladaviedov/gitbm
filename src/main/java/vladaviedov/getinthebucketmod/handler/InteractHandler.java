@@ -62,7 +62,7 @@ public class InteractHandler {
 
 		// Play sound & Update stats
 		target.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0f, 1.0f);
-		if (!target.getLevel().isClientSide()) {
+		if (!target.level.isClientSide()) {
 			CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, itemStack);
 		}
 
