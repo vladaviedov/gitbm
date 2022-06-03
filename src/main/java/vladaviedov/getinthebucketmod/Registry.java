@@ -1,12 +1,10 @@
 package vladaviedov.getinthebucketmod;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.slf4j.Logger;
 
 import vladaviedov.getinthebucketmod.item.BucketOf;
 import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
@@ -17,7 +15,6 @@ import java.util.Map;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Registry {
 
-	private static final Logger logger = LogUtils.getLogger();
 	private static final Map<EntityType<?>, Item> itemLookup = new HashMap<>();
 	public static Item generic_bucket_of;
 
@@ -126,7 +123,6 @@ public class Registry {
 				.tab(Constants.CREATIVE_TAB), type)
 				.setRegistryName(name);
 		itemLookup.put(type, item);
-		logger.info("added new item: " + name);
 		return item;
 	}
 
