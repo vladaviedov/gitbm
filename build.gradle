@@ -26,7 +26,7 @@ spotless {
 	}
 }
 
-version = '4.0.1a'
+version = '4.0.2a'
 group = 'vladaviedov.getinthebucketmod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'getinthebucketmod'
 
