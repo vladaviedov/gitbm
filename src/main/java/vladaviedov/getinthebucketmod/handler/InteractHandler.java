@@ -37,7 +37,7 @@ public class InteractHandler {
 		Entity target = event.getTarget();
 
 		// Cases to ignore event
-		if (!isBucket(item) || player.isCrouching() || !target.isAlive()) {
+		if (!(item.getItem() == Items.BUCKET) || player.isCrouching() || !target.isAlive()) {
 			return;
 		}
 
@@ -56,7 +56,6 @@ public class InteractHandler {
 		}
 
 		Item bucketOf = Registry.lookup(target.getType());
-
 		prepareEnt(target);
 		ItemStack itemStack = serializeEntToItem(bucketOf, target);
 
@@ -81,16 +80,22 @@ public class InteractHandler {
 		event.setResult(Event.Result.ALLOW);
 	}
 
-	private static boolean isBucket(ItemStack item) {
-		return item.getItem() == Items.BUCKET;
-	}
-
+	/**
+	 * Prepare entity for "bucketing"
+	 * @param ent entity
+	 */
 	private static void prepareEnt(Entity ent) {
 		ent.ejectPassengers();
 		ent.setDeltaMovement(0, 0, 0);
 		ent.fallDistance = 0;
 	}
 
+	/**
+	 * Serialize entity into an ItemStack (save NBT)
+	 * @param item underlying item
+	 * @param ent entity
+	 * @return seralized ItemStack
+	 */
 	private static ItemStack serializeEntToItem(Item item, Entity ent) {
 		ItemStack itemStack = new ItemStack(item);
 		itemStack.addTagElement(Constants.DATA_TAG, ent.serializeNBT());
