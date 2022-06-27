@@ -1,0 +1,15 @@
+{
+	"name": "autolang",
+	"version": "0.1.0",
+	"description": "Automatically generate gitbm lang files",
+	"main": "index.js",
+	"author": "Vladyslav Aviedov",
+	"license": "MIT",
+	"scripts": {
+		"start": "node .",
+		"lint": "eslint ."
+	},
+	"devDependencies": {
+		"eslint": "^8.18.0"
+	}
+}
