@@ -12,8 +12,6 @@ import vladaviedov.getinthebucketmod.item.VanillaBucketOf;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mojang.logging.LogUtils;
-
 public class Registry {
 
 	private static final DeferredRegister<Item> itemReg = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MOD_ID);
@@ -123,7 +121,6 @@ public class Registry {
 	 * @param name registry name
 	 */
 	private static void makeItem(EntityType<?> type, String name) {
-		LogUtils.getLogger().debug("Registering " + name);
 		RegistryObject<Item> item = itemReg.register(name, () ->
 				new VanillaBucketOf(new Item.Properties()
 					.stacksTo(1)
