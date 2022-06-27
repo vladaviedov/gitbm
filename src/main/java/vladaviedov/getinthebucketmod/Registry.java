@@ -29,7 +29,7 @@ public class Registry {
 			.stacksTo(1)));
 
 		// Passive mobs
-		makeItem(EntityType.ALLAY, "bucket_of_allay"); /* */
+		makeItem(EntityType.ALLAY, "bucket_of_allay");
 		makeItem(EntityType.AXOLOTL, "bucket_of_axolotl");
 		makeItem(EntityType.BAT, "bucket_of_bat");
 		makeItem(EntityType.CAT, "bucket_of_cat");
@@ -38,7 +38,7 @@ public class Registry {
 		makeItem(EntityType.COW, "bucket_of_cow");
 		makeItem(EntityType.DONKEY, "bucket_of_donkey");
 		makeItem(EntityType.FOX, "bucket_of_fox");
-		makeItem(EntityType.FROG, "bucket_of_frog"); /* */
+		makeItem(EntityType.FROG, "bucket_of_frog");
 		makeItem(EntityType.GIANT, "bucket_of_giant");
 		makeItem(EntityType.GLOW_SQUID, "bucket_of_glow_squid");
 		makeItem(EntityType.HORSE, "bucket_of_horse");
@@ -55,7 +55,7 @@ public class Registry {
 		makeItem(EntityType.SNOW_GOLEM, "bucket_of_snow_golem");
 		makeItem(EntityType.SQUID, "bucket_of_squid");
 		makeItem(EntityType.STRIDER, "bucket_of_strider");
-		makeItem(EntityType.TADPOLE, "bucket_of_tadpole"); /* */
+		makeItem(EntityType.TADPOLE, "bucket_of_tadpole");
 		makeItem(EntityType.TURTLE, "bucket_of_turtle");
 		makeItem(EntityType.TROPICAL_FISH, "bucket_of_tropical_fish");
 		makeItem(EntityType.VILLAGER, "bucket_of_villager");
@@ -86,7 +86,7 @@ public class Registry {
 		makeItem(EntityType.STRAY, "bucket_of_stray");
 		makeItem(EntityType.VEX, "bucket_of_vex");
 		makeItem(EntityType.VINDICATOR, "bucket_of_vindicator");
-		makeItem(EntityType.WARDEN, "bucket_of_warden"); /* */
+		makeItem(EntityType.WARDEN, "bucket_of_warden");
 		makeItem(EntityType.WITCH, "bucket_of_witch");
 		makeItem(EntityType.WITHER_SKELETON, "bucket_of_wither_skeleton");
 		makeItem(EntityType.ZOGLIN, "bucket_of_zoglin");
