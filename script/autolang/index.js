@@ -81,7 +81,7 @@ const langTemplate = JSON.parse(fs.readFileSync("../../template/lang.json"));
 // Create item name template
 const bucketOfEnt = langFile["item.minecraft.pufferfish_bucket"];
 const ent = langFile["entity.minecraft.pufferfish"];
-const nameTemplate = bucketOfEnt.replace(ent, "%");
+const nameTemplate = bucketOfEnt.replace(new RegExp(ent, "i"), "%");
 
 // Generate item names
 const localizedFile = { "_comment": `Auto-generated localization for ${lang}; mcversion: ${mcversion}` };
@@ -97,5 +97,5 @@ for (let entry in langTemplate) {
 const outFile = `${outDir}/${lang}.json`;
 if (!fs.existsSync(outDir))
 	fs.mkdirSync(outDir);
-fs.writeFileSync(outFile, JSON.stringify(localizedFile, null, 4), "utf-8");
+fs.writeFileSync(outFile, JSON.stringify(localizedFile, null, 4) + "\n", "utf-8");
 console.log(`Generated locale for ${lang}. Output file: ${outFile}`);
