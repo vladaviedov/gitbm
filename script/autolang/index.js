@@ -15,7 +15,7 @@ const nthIndexOf = (string, substr, n) => {
 	return index;
 };
 
-let location = os.homedir() + "/.minecraft/";
+let location = `${os.homedir()}/.minecraft`;
 let lang = undefined;
 let mcversion = undefined;
 
@@ -47,7 +47,7 @@ if (mcversion == undefined)
 	fatal("Error: 'mcversion' must be specified");
 
 // Get indexes file
-const indexesPath = location + "assets/indexes/" + mcversion + ".json";
+const indexesPath = `${location}/assets/indexes/${mcversion}.json`;
 let indexes;
 try {
 	indexes = JSON.parse(fs.readFileSync(indexesPath, "utf-8"));
@@ -56,14 +56,14 @@ try {
 }
 
 // Obtain lang file hash
-const langIndexKey = "minecraft/lang/" + lang + ".json";
+const langIndexKey = `minecraft/lang/${lang}.json`;
 const langEntry = indexes["objects"][langIndexKey];
 if (langEntry == undefined)
 	fatal("Error: language not listed in indexes");
 const langHash = langEntry["hash"];
 
 // Get lang file
-const langPath = location + "assets/objects/" + langHash.substring(0, 2) + "/" + langHash;
+const langPath = `${location}/assets/objects/${langHash.substring(0, 2)}/${langHash}`;
 let langFile;
 try {
 	langFile = JSON.parse(fs.readFileSync(langPath, "utf-8"));
@@ -80,9 +80,19 @@ const ent = langFile["entity.minecraft.pufferfish"];
 const nameTemplate = bucketOfEnt.replace(ent, "%");
 
 // Generate item names
+const localizedFile = { "_comment": `Auto-generated localization for ${lang}; mcversion: ${mcversion}` };
 for (let entry in langTemplate) {
 	const name = entry.substring(nthIndexOf(entry, "_", 2) + 1);
 	if (name == "entity") continue;
-	const entity = langFile["entity.minecraft." + name];
-	console.log(nameTemplate.replace("%", entity));
+	const entity = langFile[`entity.minecraft.${name}`];
+	const localName = nameTemplate.replace("%", entity);
+	localizedFile[entry] = localName;
 }
+
+// Write to file
+const outDir = "out";
+const outFile = `./${outDir}/${lang}.json`;
+if (!fs.existsSync(outDir))
+	fs.mkdirSync(outDir);
+fs.writeFileSync(outFile, JSON.stringify(localizedFile, null, 4), "utf-8");
+console.log(`Generated locale for ${lang}. Output file: ${outFile}`);
