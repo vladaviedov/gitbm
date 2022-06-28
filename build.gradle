@@ -207,6 +207,24 @@ publishing {
     }
 }
 
+task autolang () {
+	outputs.cacheIf { false }
+	doLast {
+		def langList = [ "en_gb", "ja_jp", "fr_fr", "es_es" ]
+
+		for (lang in langList) {
+			exec {
+				workingDir "script/autolang"
+				commandLine "yarn", "run", "gen", "--lang=${lang}", "--mcversion=1.19"
+			}
+			exec {
+				workingDir "script/autolang"
+				commandLine "cp", "out/${lang}.json", "../../src/main/resources/assets/getinthebucketmod/lang"
+			}
+		}
+	}
+}
+
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+	options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
