@@ -6,6 +6,14 @@ const fatal = msg => {
 	console.error(msg);
 	process.exit(1);
 };
+const nthIndexOf = (string, substr, n) => {
+	let ctr = 0;
+	let index = -1;
+	do {
+		index = string.indexOf(substr, index + 1);
+	} while (index != -1 && (++ctr < n));
+	return index;
+};
 
 let location = os.homedir() + "/.minecraft/";
 let lang = undefined;
@@ -55,7 +63,7 @@ if (langEntry == undefined)
 const langHash = langEntry["hash"];
 
 // Get lang file
-const langPath = location + "assets/objects/" + langHash.substr(0, 2) + "/" + langHash;
+const langPath = location + "assets/objects/" + langHash.substring(0, 2) + "/" + langHash;
 let langFile;
 try {
 	langFile = JSON.parse(fs.readFileSync(langPath, "utf-8"));
@@ -63,4 +71,18 @@ try {
 	fatal("Failed to load lang file\n" + err);
 }
 
-console.log(langFile);
+// Load lang file template
+const langTemplate = JSON.parse(fs.readFileSync("../../template/lang.json"));
+
+// Create item name template
+const bucketOfEnt = langFile["item.minecraft.pufferfish_bucket"];
+const ent = langFile["entity.minecraft.pufferfish"];
+const nameTemplate = bucketOfEnt.replace(ent, "%");
+
+// Generate item names
+for (let entry in langTemplate) {
+	const name = entry.substring(nthIndexOf(entry, "_", 2) + 1);
+	if (name == "entity") continue;
+	const entity = langFile["entity.minecraft." + name];
+	console.log(nameTemplate.replace("%", entity));
+}
