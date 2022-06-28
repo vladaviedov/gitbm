@@ -83,8 +83,8 @@ const nameTemplate = bucketOfEnt.replace(ent, "%");
 const localizedFile = { "_comment": `Auto-generated localization for ${lang}; mcversion: ${mcversion}` };
 for (let entry in langTemplate) {
 	const name = entry.substring(nthIndexOf(entry, "_", 2) + 1);
-	if (name == "entity") continue;
 	const entity = langFile[`entity.minecraft.${name}`];
+	if (entity == undefined) continue;
 	const localName = nameTemplate.replace("%", entity);
 	localizedFile[entry] = localName;
 }
