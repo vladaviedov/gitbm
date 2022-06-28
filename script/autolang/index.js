@@ -18,6 +18,7 @@ const nthIndexOf = (string, substr, n) => {
 let location = `${os.homedir()}/.minecraft`;
 let lang = undefined;
 let mcversion = undefined;
+let outDir = "./out";
 
 // Parse arguments
 const argv = minimist(process.argv.slice(2));
@@ -31,6 +32,9 @@ for (const arg in argv) {
 			break;
 		case "mcversion":
 			mcversion = argv[arg];
+			break;
+		case "out":
+			outDir = argv[arg];
 			break;
 		case "_":
 			break;
@@ -90,8 +94,7 @@ for (let entry in langTemplate) {
 }
 
 // Write to file
-const outDir = "out";
-const outFile = `./${outDir}/${lang}.json`;
+const outFile = `${outDir}/${lang}.json`;
 if (!fs.existsSync(outDir))
 	fs.mkdirSync(outDir);
 fs.writeFileSync(outFile, JSON.stringify(localizedFile, null, 4), "utf-8");

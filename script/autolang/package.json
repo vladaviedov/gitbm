@@ -6,7 +6,7 @@
 	"author": "Vladyslav Aviedov",
 	"license": "MIT",
 	"scripts": {
-		"start": "node .",
+		"gen": "node .",
 		"lint": "eslint ."
 	},
 	"devDependencies": {
