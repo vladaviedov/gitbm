@@ -212,13 +212,18 @@ task autolang () {
 	doLast {
 		def langList = [ "en_gb", "ja_jp", "fr_fr", "es_es" ]
 
+		exec {
+			workingDir "script/gitbm-autolang"
+			commandLine "yarn", "install"
+		}
+
 		for (lang in langList) {
 			exec {
-				workingDir "script/autolang"
+				workingDir "script/gitbm-autolang"
 				commandLine "yarn", "run", "gen", "--lang=${lang}", "--mcversion=1.19"
 			}
 			exec {
-				workingDir "script/autolang"
+				workingDir "script/gitbm-autolang"
 				commandLine "cp", "out/${lang}.json", "../../src/main/resources/assets/getinthebucketmod/lang"
 			}
 		}
