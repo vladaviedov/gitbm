@@ -31,7 +31,7 @@ public class InteractHandler {
 
 	@SubscribeEvent
 	public static void onInteract(PlayerInteractEvent.EntityInteractSpecific event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		InteractionHand hand = event.getHand();
 		ItemStack item = player.getItemInHand(hand);
 		Entity target = event.getTarget();
