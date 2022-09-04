@@ -134,8 +134,12 @@ public class Registry {
 	 * @return bucket of that entity or generic bucket if not found
 	 */
 	public static Item lookup(EntityType<?> t) {
-		Item result = itemLookup.get(t).get();
-		return result != null ? result : generic_bucket_of.get();
+		RegistryObject<Item> entry = itemLookup.get(t);
+		if (entry == null) {
+			return generic_bucket_of.get();
+		}
+
+		return entry.get();
 	}
 
 }
