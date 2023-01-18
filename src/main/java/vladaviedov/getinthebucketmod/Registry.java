@@ -2,6 +2,7 @@ package vladaviedov.getinthebucketmod;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -111,8 +112,19 @@ public class Registry {
 		makeItem(EntityType.WITHER, "bucket_of_wither");
 		makeItem(EntityType.ENDER_DRAGON, "bucket_of_ender_dragon");
 
+		// Add creative tab
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(Registry::addCreative);
+
 		// Finalize
 		itemReg.register(FMLJavaModLoadingContext.get().getModEventBus());
+	}
+
+	private static void addCreative(CreativeModeTabEvent.BuildContents event) {
+		if (event.getTab() == Constants.CREATIVE_TAB) {
+			for (RegistryObject<Item> item : itemLookup.values()) {
+				event.accept(item);
+			}
+		}
 	}
 
 	/**
@@ -123,8 +135,7 @@ public class Registry {
 	private static void makeItem(EntityType<?> type, String name) {
 		RegistryObject<Item> item = itemReg.register(name, () ->
 				new VanillaBucketOf(new Item.Properties()
-					.stacksTo(1)
-					.tab(Constants.CREATIVE_TAB), type));
+					.stacksTo(1), type));
 		itemLookup.put(type, item);
 	}
 
