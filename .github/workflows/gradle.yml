@@ -22,7 +22,7 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Regular Build
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+      uses: gradle/gradle-build-action@v2.4.2
       with:
         arguments: build -x spotlessJavaCheck
 
@@ -38,6 +38,6 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Code Quality Check
-      uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+      uses: gradle/gradle-build-action@v2.4.2
       with:
         arguments: spotlessJavaCheck
