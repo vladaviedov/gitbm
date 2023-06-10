@@ -1,5 +1,7 @@
 {
-	"_comment": "",
+	"_comment": "Main localization file",
+	"_mcversion": "1.20",
+	"_date": "2023-06-10",
 	"item.gitbm.bucket_of_allay": "Bucket of Allay",
 	"item.gitbm.bucket_of_axolotl": "Bucket of Axolotl",
 	"item.gitbm.bucket_of_bat": "Bucket of Bat",

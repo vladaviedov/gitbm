@@ -135,7 +135,7 @@ publishing {
 task autolang () {
 	outputs.cacheIf { false }
 	doLast {
-		def langList = [ "en_gb", "ja_jp", "fr_fr", "es_es" ]
+		def langList = [ "en_gb", "ru_ru", "zh_cn", "ja_jp", "fr_fr", "es_es" ]
 
 		exec {
 			workingDir "script/gitbm-autolang"
@@ -145,7 +145,7 @@ task autolang () {
 		for (lang in langList) {
 			exec {
 				workingDir "script/gitbm-autolang"
-				commandLine "yarn", "run", "gen", "--lang=${lang}", "--mcversion=1.19.3"
+				commandLine "yarn", "run", "gen", "--lang=${lang}", "--mcversion=${minecraft_version}"
 			}
 			exec {
 				workingDir "script/gitbm-autolang"
