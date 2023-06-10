@@ -1,8 +1,9 @@
 package vladaviedov.gitbm;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,6 +32,7 @@ public class Registry {
 		makeItem(EntityType.ALLAY, "bucket_of_allay");
 		makeItem(EntityType.AXOLOTL, "bucket_of_axolotl");
 		makeItem(EntityType.BAT, "bucket_of_bat");
+		makeItem(EntityType.CAMEL, "bucket_of_camel");
 		makeItem(EntityType.CAT, "bucket_of_cat");
 		makeItem(EntityType.COD, "bucket_of_cod");
 		makeItem(EntityType.CHICKEN, "bucket_of_chicken");
@@ -51,6 +53,7 @@ public class Registry {
 		makeItem(EntityType.SALMON, "bucket_of_salmon");
 		makeItem(EntityType.SHEEP, "bucket_of_sheep");
 		makeItem(EntityType.SKELETON_HORSE, "bucket_of_skeleton_horse");
+		makeItem(EntityType.SNIFFER, "bucket_of_sniffer");
 		makeItem(EntityType.SNOW_GOLEM, "bucket_of_snow_golem");
 		makeItem(EntityType.SQUID, "bucket_of_squid");
 		makeItem(EntityType.STRIDER, "bucket_of_strider");
@@ -119,8 +122,8 @@ public class Registry {
 		itemReg.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
-	private static void addCreative(CreativeModeTabEvent.BuildContents event) {
-		if (event.getTab() == Constants.CREATIVE_TAB) {
+	private static void addCreative(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			for (RegistryObject<Item> item : itemLookup.values()) {
 				event.accept(item);
 			}
