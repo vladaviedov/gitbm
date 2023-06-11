@@ -135,7 +135,7 @@ publishing {
 task autolang () {
 	outputs.cacheIf { false }
 	doLast {
-		def langList = [ "en_gb", "ru_ru", "zh_cn", "ja_jp", "fr_fr", "es_es" ]
+		def langList = [ "en_gb", "ru_ru", "zh_cn", "zh_tw", "ja_jp", "fr_fr", "es_es", "de_de", "tr_tr" ]
 
 		exec {
 			workingDir "script/gitbm-autolang"
@@ -149,7 +149,7 @@ task autolang () {
 			}
 			exec {
 				workingDir "script/gitbm-autolang"
-				commandLine "cp", "out/${lang}.json", "../../src/main/resources/assets/getinthebucketmod/lang"
+				commandLine "cp", "out/${lang}.json", "../../src/main/resources/assets/gitbm/lang"
 			}
 		}
 	}
